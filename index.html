@@ -101,9 +101,7 @@
 
 <body>
 
-  <!-- Cute background music -->
   <audio id="music" loop>
-    <!-- Replace the src with ANY cute mp3 you like -->
     <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_8c02b7e3f2.mp3" type="audio/mpeg">
   </audio>
 
@@ -126,8 +124,8 @@
     const music = document.getElementById("music");
 
     let yesScale = 1;
+    let noScale = 1; // 🔹 NEW: scale for No button
 
-    // play music on first interaction (browser rule)
     document.body.addEventListener("click", () => {
       music.play().catch(() => {});
     }, { once: true });
@@ -136,7 +134,12 @@
       // make NO run away
       const x = Math.random() * 300 - 150;
       const y = Math.random() * 200 - 100;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+      // 🔹 make NO smaller every time
+      noScale -= 0.12;
+      if (noScale < 0.3) noScale = 0.3; // don’t fully disappear
+
+      noBtn.style.transform = `translate(${x}px, ${y}px) scale(${noScale})`;
 
       // YES grows bigger every time
       yesScale += 0.15;
@@ -148,7 +151,7 @@
         <h1>YAYYYY pookie 😭💘</h1>
         <p>You’re officially my Valentine now 💕<br>
         No take-backs. No refunds. Only love ♾️
-        <br> I love youuu soooo sooo muchhh pookieee</p>
+ <br> I love youuu soooo sooo muchhh pookieee</p>
       `;
       startHearts();
     });
@@ -169,4 +172,3 @@
 
 </body>
 </html>
-
